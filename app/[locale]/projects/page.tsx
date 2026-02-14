@@ -246,13 +246,13 @@ export default function ProjectsPage() {
 
           {/* Navigation Buttons */}
           <button 
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); navigateLightbox('prev'); }}
           >
             <ChevronLeft className="w-10 h-10" />
           </button>
           <button 
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); navigateLightbox('next'); }}
           >
             <ChevronRight className="w-10 h-10" />
