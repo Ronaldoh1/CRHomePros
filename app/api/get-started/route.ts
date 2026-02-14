@@ -85,7 +85,6 @@ export async function POST(request: NextRequest) {
         contactTag,
         additionalNotes: additionalNotes || '',
         driveFolderUrl,
-        driveFolderName: folderName,
         attachments: emailAttachments.length > 0 ? emailAttachments : undefined,
       })
       console.log('📧 Lead notification email result:', emailSent ? '✅ SUCCESS' : '❌ FAILED')
