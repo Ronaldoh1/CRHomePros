@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-10-15",
     readTime: "6 min",
     image:
-      "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
+      "/images/blog/team-working.png",
     excerpt:
       "When homeowners invite us into their homes, they're trusting us with more than just a project. Here's why respect, communication, and pride guide everything we do.",
     content: `
@@ -74,7 +74,7 @@ At the end of the day, our work is about more than construction. It is about rel
     date: "2025-11-22",
     readTime: "5 min",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+      "/images/blog/consultation.png",
     excerpt:
       "The people you work with make all the difference. Here's what I look for when building a team and why it matters for homeowners.",
     content: `
@@ -114,7 +114,7 @@ At CR Home Pros, our team is our foundation. Every person plays a role in making
     date: "2025-12-08",
     readTime: "7 min",
     image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
+      "/images/blog/home-exterior.png",
     excerpt:
       "After 15 years in this business, here are the most important lessons I've learned about doing quality work and building lasting relationships.",
     content: `
@@ -170,7 +170,7 @@ Fifteen years in, I feel more confident in what we do at CR Home Pros, but I als
     date: "2026-02-05",
     readTime: "8 min",
     image:
-      "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
+      "/images/blog/hvac-unit.png",
     excerpt:
       "Your heating and cooling system is trying to tell you something. Ignore these warning signs, and you could face emergency replacements at the worst possible time and the highest possible cost.",
     content: `
@@ -304,7 +304,7 @@ The worst HVAC decision you can make is no decision at all. Those warning signs 
     date: "2026-01-28",
     readTime: "7 min",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+      "/images/blog/mold-damage.png",
     excerpt:
       "That small leak or water stain might seem harmless now, but waiting to fix it could cost you thousands. Here is why water damage demands immediate attention.",
     content: `
@@ -401,7 +401,7 @@ If you are in the DMV area and you have any concerns about water damage, call us
     date: "2026-01-12",
     readTime: "6 min",
     image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
+      "/images/blog/living-room.png",
     excerpt:
       "Not sure what to ask when vetting contractors? Here are the questions that will help you make a confident decision.",
     content: `
@@ -465,7 +465,7 @@ At CR Home Pros, we welcome these questions because we know that informed homeow
     date: "2025-09-20",
     readTime: "8 min",
     image:
-      "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80",
+      "/images/blog/painting.png",
     excerpt:
       "Planning a kitchen remodel in Maryland, DC, or Virginia? Here's what drives costs and how to budget realistically.",
     content: `
@@ -532,7 +532,7 @@ At CR Home Pros, we work with homeowners to balance their vision with their budg
     date: "2025-11-05",
     readTime: "6 min",
     image:
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&q=80",
+      "/images/blog/mold-damage.png",
     excerpt:
       "Water damage in bathrooms often hides until it becomes a bigger problem. Here's what to watch for and how to address it.",
     content: `
@@ -602,7 +602,7 @@ At CR Home Pros, we handle bathroom repairs and renovations throughout the DMV. 
     date: "2025-10-28",
     readTime: "7 min",
     image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+      "/images/blog/basement.png",
     excerpt:
       "Finishing a basement in an older home comes with unique challenges. Here's what to consider before starting your project.",
     content: `
@@ -680,7 +680,7 @@ At CR Home Pros, we have experience finishing basements throughout the DMV. If y
     date: "2025-12-18",
     readTime: "5 min",
     image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80",
+      "/images/blog/deck.png",
     excerpt:
       "The DMV's weather can be tough on decks. Here's how to keep yours in good shape year-round.",
     content: `
@@ -750,7 +750,7 @@ At CR Home Pros, we build and maintain decks throughout Maryland, DC, and Virgin
     date: "2026-01-20",
     readTime: "6 min",
     image:
-      "https://images.unsplash.com/photo-1617141636403-f511e2d5dc17?w=800&q=80",
+      "/images/blog/concrete-work.png",
     excerpt:
       "Most concrete failures start below the surface. Here's why proper preparation is critical for a driveway that lasts.",
     content: `
@@ -828,7 +828,7 @@ At CR Home Pros, we do not cut corners on preparation. If you are planning a new
     date: "2026-02-01",
     readTime: "5 min",
     image:
-      "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80",
+      "/images/blog/consultation.png",
     excerpt:
       "Most conflicts and delays in home improvement projects come from poor communication. Here's how we avoid that.",
     content: `

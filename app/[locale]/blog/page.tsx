@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowRight, Calendar, Clock, User } from "lucide-react";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/blog-posts";
 import { cn } from "@/lib/utils";
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 const categories = ["All", ...BLOG_CATEGORIES];
 
@@ -54,7 +55,7 @@ export default function BlogPage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src={featuredPost.image}
+                  src={resolveImageUrl(featuredPost.image)}
                   alt={featuredPost.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -133,7 +134,7 @@ export default function BlogPage() {
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
-                      src={post.image}
+                      src={resolveImageUrl(post.image)}
                       alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"

@@ -26,7 +26,7 @@ function toStoragePath(localPath: string): string {
   // Team photos: /images/team-carlos-01.png → team/team-carlos-01.png
   if (rel.startsWith('team-')) return `team/${rel}`
 
-  // Logo: /images/logo.png → site/logo.png
+  // Logo & site assets: /images/logo.png → site/logo.png
   if (rel === 'logo.png' || rel === 'og-image.jpg') return `site/${rel}`
 
   // Everything else (project folders): /images/2025-05/x.png → projects/2025-05/x.png

@@ -1,9 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { X, AlertTriangle, Phone } from 'lucide-react'
+import { X, Phone, AlertTriangle } from 'lucide-react'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
 import { COMPANY } from '@/lib/constants'
 
 interface EmergencyModalProps {
@@ -15,59 +13,73 @@ export function EmergencyModal({ isOpen, onClose }: EmergencyModalProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-dark-100 hover:bg-dark-200 transition-colors z-10"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-red-500 to-red-600 p-6 text-white">
-          <div className="flex items-center gap-3 mb-2">
-            <AlertTriangle className="w-8 h-8" />
-            <h2 className="text-2xl font-bold">Emergency Service</h2>
+        <div className="bg-red-600 text-white px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5" />
+            <h2 className="text-xl font-bold">Emergency Service</h2>
           </div>
-          <p className="text-red-100">24/7 Available - Fast Response</p>
+          <button 
+            onClick={onClose}
+            className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 space-y-6">
-          <div>
-            <h3 className="text-lg font-bold mb-3 text-dark-900">Emergency Pricing</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 bg-dark-50 rounded-lg">
-                <span className="font-medium">Standard Emergency Call</span>
-                <span className="text-xl font-bold text-gold-600">$150</span>
+        {/* Pricing */}
+        <div className="p-6 space-y-4">
+          <p className="text-dark-600 text-sm">
+            We respond to emergencies fast. Here are our on-call rates:
+          </p>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-between p-3 bg-dark-50 rounded-xl">
+              <div>
+                <p className="font-semibold text-dark-900">Standard Emergency</p>
+                <p className="text-sm text-dark-500">Mon–Fri, 8AM–6PM</p>
               </div>
-              <div className="flex justify-between items-center p-3 bg-dark-50 rounded-lg">
-                <span className="font-medium">After Hours (6pm-8am)</span>
-                <span className="text-xl font-bold text-gold-600">$200</span>
+              <span className="text-xl font-bold text-red-600">$150<span className="text-sm font-normal text-dark-400">/hr</span></span>
+            </div>
+
+            <div className="flex items-center justify-between p-3 bg-dark-50 rounded-xl">
+              <div>
+                <p className="font-semibold text-dark-900">After Hours</p>
+                <p className="text-sm text-dark-500">Mon–Fri, 6PM–8AM</p>
               </div>
-              <div className="flex justify-between items-center p-3 bg-dark-50 rounded-lg">
-                <span className="font-medium">Weekends & Holidays</span>
-                <span className="text-xl font-bold text-gold-600">$250</span>
+              <span className="text-xl font-bold text-red-600">$200<span className="text-sm font-normal text-dark-400">/hr</span></span>
+            </div>
+
+            <div className="flex items-center justify-between p-3 bg-dark-50 rounded-xl">
+              <div>
+                <p className="font-semibold text-dark-900">Weekends & Holidays</p>
+                <p className="text-sm text-dark-500">Sat–Sun, all day</p>
               </div>
+              <span className="text-xl font-bold text-red-600">$250<span className="text-sm font-normal text-dark-400">/hr</span></span>
             </div>
           </div>
 
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm text-dark-700">
-              <strong>Note:</strong> Emergency fee covers diagnosis and first hour. Additional work billed separately. We'll provide a full estimate before starting major repairs.
-            </p>
-          </div>
+          <p className="text-xs text-dark-400 italic">
+            Dispatch fee of $75 applies. Minimum 1-hour service call.
+            Additional work billed separately. We'll provide a full estimate before starting major repairs.
+          </p>
 
-          {/* Actions */}
           <div className="space-y-3">
             <a
-              href={`tel:${COMPANY.phone}`}
+              href="tel:5712377164"
               className="flex items-center justify-center gap-3 w-full bg-red-500 hover:bg-red-600 text-white py-4 rounded-xl font-bold text-lg transition-colors"
             >
               <Phone className="w-5 h-5" />
-              Call Now: {COMPANY.phoneFormatted}
+              Call Now: (571) 237-7164
             </a>
             <Link
               href="/contact"

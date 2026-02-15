@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, User, ArrowLeft, ArrowRight } from 'lucide-react'
 import { BLOG_POSTS, getPostBySlug } from '@/lib/blog-posts'
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 interface BlogPostPageProps {
   params: {
@@ -101,7 +102,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="container-custom">
           <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src={post.image}
+              src={resolveImageUrl(post.image)}
               alt={post.title}
               fill
               className="object-cover"

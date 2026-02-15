@@ -1,15 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { EmergencyModal } from '@/components/EmergencyModal'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Phone, ChevronDown } from 'lucide-react'
-import { cn, formatPhoneLink } from '@/lib/utils'
+import { Menu, X, Phone, ChevronDown, Globe, AlertTriangle, MessageCircle } from 'lucide-react'
+import { cn, formatPhoneLink, formatWhatsAppLink } from '@/lib/utils'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showEmergencyModal, setShowEmergencyModal] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0) // 0 to 1
   const pathname = usePathname()
 
@@ -67,7 +69,7 @@ export function Navbar() {
           <nav className="flex items-center justify-between">
             {/* Logo with scroll-based shrink and fade effect */}
             <Link href="/" className="flex items-center group">
-              <div 
+              <div
                 className="relative transition-all duration-150 ease-out px-4 py-3 -ml-2"
                 style={{
                   height: `${logoHeight}px`,
@@ -82,7 +84,7 @@ export function Navbar() {
                   width={300}
                   height={80}
                   className="h-full w-auto object-contain"
-                  style={{ 
+                  style={{
                     maxWidth: 'none',
                     filter: 'brightness(1.1) contrast(0.95)',
                     mixBlendMode: 'screen',
@@ -102,7 +104,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5',
+                    'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5',
                     isActive(link.href)
                       ? 'bg-white/20 text-white'
                       : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -119,15 +121,36 @@ export function Navbar() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-4">
-              <span
-                className="text-sm font-medium px-3 py-1 rounded-full bg-gold-500/20 text-gold-300"
+            <div className="hidden lg:flex items-center gap-2 ml-2">
+              {/* Emergency Button — opens pricing modal */}
+              <button
+                onClick={() => setShowEmergencyModal(true)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-all duration-300 bg-red-600/90 text-white hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/25 animate-pulse hover:animate-none whitespace-nowrap"
               >
+                <AlertTriangle className="w-3.5 h-3.5" />
+                Emergency?
+              </button>
+
+              {/* Hablamos Español badge */}
+              <span className="text-sm font-medium px-3 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30 whitespace-nowrap">
                 ¡Hablamos Español!
               </span>
+
+              {/* WhatsApp */}
+              <a
+                href={formatWhatsAppLink(COMPANY.phone, "Hi! I'm interested in your services.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3 py-2.5 rounded-xl font-medium transition-all duration-300 bg-[#25D366] text-white hover:bg-[#20bd5a] hover:shadow-lg"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </a>
+
+              {/* Phone */}
               <a
                 href={formatPhoneLink(COMPANY.phone)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all duration-300 bg-white text-primary-800 hover:bg-white/90 hover:shadow-lg"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300 bg-white text-primary-800 hover:bg-white/90 hover:shadow-lg whitespace-nowrap"
               >
                 <Phone className="w-4 h-4" />
                 {COMPANY.phoneFormatted}
@@ -215,11 +238,21 @@ export function Navbar() {
                 ))}
               </ul>
 
-              {/* Get Started CTA */}
-              <div className="mt-6 pt-6 border-t border-dark-100">
+              {/* Mobile CTAs */}
+              <div className="mt-6 pt-6 border-t border-dark-100 space-y-3">
+                {/* Emergency — opens pricing modal */}
+                <button
+                  onClick={() => { setShowEmergencyModal(true); setIsOpen(false); }}
+                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-red-600 text-white font-bold text-lg"
+                >
+                  <AlertTriangle className="w-5 h-5" />
+                  Got an Emergency?
+                </button>
+
+                {/* Get Started */}
                 <Link
                   href="/get-started"
-                  className="btn-gold w-full text-center text-lg"
+                  className="btn-gold w-full text-center text-lg block"
                 >
                   Get Free Estimate
                 </Link>
@@ -227,7 +260,7 @@ export function Navbar() {
             </nav>
 
             {/* Footer */}
-            <div className="p-5 border-t border-dark-100 bg-dark-50">
+            <div className="p-5 border-t border-dark-100 bg-dark-50 space-y-3">
               <a
                 href={formatPhoneLink(COMPANY.phone)}
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary-800 text-white font-medium"
@@ -235,13 +268,25 @@ export function Navbar() {
                 <Phone className="w-5 h-5" />
                 Call {COMPANY.phoneFormatted}
               </a>
-              <p className="text-center text-sm text-dark-500 mt-3">
+              <a
+                href={formatWhatsAppLink(COMPANY.phone, "Hi! I'm interested in your services.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#25D366] text-white font-medium"
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp Us
+              </a>
+              <p className="text-center text-sm text-dark-500 mt-2">
                 ¡Hablamos Español!
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Emergency Pricing Modal */}
+      <EmergencyModal isOpen={showEmergencyModal} onClose={() => setShowEmergencyModal(false)} />
     </>
   )
 }
