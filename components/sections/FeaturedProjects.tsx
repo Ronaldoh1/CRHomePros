@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, MapPin, Clock, ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 // REAL projects from crgenserv.com - Carlos's actual work
 const featuredProjects = [

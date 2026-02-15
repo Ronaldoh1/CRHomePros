@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ArrowRight, MapPin, Clock, Calendar, ChevronLeft, ChevronRight, Phone } from 'lucide-react'
 import { cn, formatPhoneLink } from '@/lib/utils'
 import { COMPANY } from '@/lib/constants'
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 // Sample project data - will come from Firebase
 const projectsData: Record<string, {

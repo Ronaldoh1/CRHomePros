@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { GALLERY_PROJECTS as RAW_PROJECTS, GALLERY_CATEGORIES, type GalleryCategory } from '@/lib/gallery-data'
 import { resolveProjectImages } from '@/lib/resolve-images'
 import { BeforeAfterSlider } from '@/components/ui/BeforeAfterSlider'
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 // Resolve image URLs — uses Firebase Storage when configured, local paths otherwise
 const GALLERY_PROJECTS = RAW_PROJECTS.map(resolveProjectImages)
@@ -181,7 +182,7 @@ export default function ProjectsPage() {
                               className="aspect-square relative rounded-lg overflow-hidden group bg-dark-100"
                             >
                               <Image
-                                src={img}
+                                src={resolveImageUrl(img)}
                                 alt={`${project.title} - Image ${idx + 1}`}
                                 fill
                                 className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -203,7 +204,7 @@ export default function ProjectsPage() {
                           onClick={() => openLightbox(project.images[0], project.id, 0)}
                         >
                           <Image
-                            src={project.images[0]}
+                            src={resolveImageUrl(project.images[0])}
                             alt={`${project.title} - Featured`}
                             fill
                             className="object-cover"

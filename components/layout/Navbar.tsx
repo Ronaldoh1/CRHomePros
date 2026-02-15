@@ -5,21 +5,20 @@ import { EmergencyModal } from '@/components/EmergencyModal'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Phone, ChevronDown, Globe, AlertTriangle, MessageCircle } from 'lucide-react'
+import { Menu, X, Phone, ChevronDown, Globe, AlertTriangle } from 'lucide-react'
 import { cn, formatPhoneLink, formatWhatsAppLink } from '@/lib/utils'
-import { resolveImageUrl } from '@/lib/resolve-images'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
+import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [showEmergencyModal, setShowEmergencyModal] = useState(false)
-  const [scrollProgress, setScrollProgress] = useState(0) // 0 to 1
+  const [scrollProgress, setScrollProgress] = useState(0)
   const pathname = usePathname()
 
-  // Handle scroll effect with smooth progress
   useEffect(() => {
     const handleScroll = () => {
-      // Calculate scroll progress from 0 to 1 over the first 150px
       const progress = Math.min(window.scrollY / 150, 1)
       setScrollProgress(progress)
     }
@@ -29,12 +28,10 @@ export function Navbar() {
 
   const isScrolled = scrollProgress > 0.1
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false)
   }, [pathname])
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -51,10 +48,9 @@ export function Navbar() {
     return pathname.startsWith(href)
   }
 
-  // Calculate logo styles based on scroll progress
-  const logoHeight = 80 - (scrollProgress * 40) // 80px -> 40px
-  const logoOpacity = 1 - (scrollProgress * 0.3) // 1 -> 0.7
-  const logoScale = 1 - (scrollProgress * 0.2) // 1 -> 0.8
+  const logoHeight = 80 - (scrollProgress * 40)
+  const logoOpacity = 1 - (scrollProgress * 0.3)
+  const logoScale = 1 - (scrollProgress * 0.2)
 
   return (
     <>
@@ -68,7 +64,7 @@ export function Navbar() {
       >
         <div className="container-custom">
           <nav className="flex items-center justify-between">
-            {/* Logo with scroll-based shrink and fade effect */}
+            {/* Logo — blended with gold glow */}
             <Link href="/" className="flex items-center group">
               <div
                 className="relative transition-all duration-150 ease-out px-4 py-3 -ml-2"
@@ -84,12 +80,11 @@ export function Navbar() {
                   alt="CR Home Pros - Complete Home Services"
                   width={300}
                   height={80}
-                  className="h-full w-auto object-contain"
+                  className="h-full w-auto object-contain drop-shadow-[0_0_8px_rgba(196,164,95,0.3)]"
                   style={{
                     maxWidth: 'none',
-                    filter: 'brightness(1.1) contrast(0.95)',
+                    filter: 'brightness(1.15) contrast(0.9)',
                     mixBlendMode: 'screen',
-                    opacity: 0.95
                   }}
                   priority
                   quality={100}
@@ -123,7 +118,6 @@ export function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-2 ml-2">
-              {/* Emergency Button — opens pricing modal */}
               <button
                 onClick={() => setShowEmergencyModal(true)}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold transition-all duration-300 bg-red-600/90 text-white hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/25 animate-pulse hover:animate-none whitespace-nowrap"
@@ -132,12 +126,10 @@ export function Navbar() {
                 Emergency?
               </button>
 
-              {/* Hablamos Español badge */}
               <span className="text-sm font-medium px-3 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30 whitespace-nowrap">
                 ¡Hablamos Español!
               </span>
 
-              {/* WhatsApp */}
               <a
                 href={formatWhatsAppLink(COMPANY.phone, "Hi! I'm interested in your services.")}
                 target="_blank"
@@ -145,10 +137,9 @@ export function Navbar() {
                 className="flex items-center gap-2 px-3 py-2.5 rounded-xl font-medium transition-all duration-300 bg-[#25D366] text-white hover:bg-[#20bd5a] hover:shadow-lg"
                 aria-label="WhatsApp"
               >
-                <MessageCircle className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
               </a>
 
-              {/* Phone */}
               <a
                 href={formatPhoneLink(COMPANY.phone)}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-300 bg-white text-primary-800 hover:bg-white/90 hover:shadow-lg whitespace-nowrap"
@@ -179,13 +170,11 @@ export function Navbar() {
             : 'opacity-0 pointer-events-none'
         )}
       >
-        {/* Backdrop */}
         <div
           className="absolute inset-0 bg-dark-900/60 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
 
-        {/* Menu Panel */}
         <div
           className={cn(
             'absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-2xl transition-transform duration-300 ease-out',
@@ -215,7 +204,7 @@ export function Navbar() {
             </div>
 
             {/* Navigation Links */}
-            <nav className="flex-1 overflow-y-auto p-5">
+            <nav className="flex-1 overflow-y-auto p-5 relative">
               <ul className="space-y-1">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
@@ -241,7 +230,6 @@ export function Navbar() {
 
               {/* Mobile CTAs */}
               <div className="mt-6 pt-6 border-t border-dark-100 space-y-3">
-                {/* Emergency — opens pricing modal */}
                 <button
                   onClick={() => { setShowEmergencyModal(true); setIsOpen(false); }}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-red-600 text-white font-bold text-lg"
@@ -250,13 +238,22 @@ export function Navbar() {
                   Got an Emergency?
                 </button>
 
-                {/* Get Started */}
                 <Link
                   href="/get-started"
                   className="btn-gold w-full text-center text-lg block"
                 >
                   Get Free Estimate
                 </Link>
+              </div>
+
+              {/* Scroll fade hint — tells user there's more below */}
+              <div className="sticky bottom-0 left-0 right-0 pointer-events-none mt-4">
+                <div className="h-10 bg-gradient-to-t from-white to-transparent" />
+                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 animate-bounce">
+                  <svg className="w-5 h-5 text-dark-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </div>
             </nav>
 
@@ -275,7 +272,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#25D366] text-white font-medium"
               >
-                <MessageCircle className="w-5 h-5" />
+                <WhatsAppIcon className="w-5 h-5" />
                 WhatsApp Us
               </a>
               <p className="text-center text-sm text-dark-500 mt-2">
@@ -286,7 +283,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Emergency Pricing Modal */}
       <EmergencyModal isOpen={showEmergencyModal} onClose={() => setShowEmergencyModal(false)} />
     </>
   )
