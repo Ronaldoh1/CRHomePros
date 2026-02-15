@@ -1,12 +1,40 @@
 // ============================================
 // Image URL Resolver
 // ============================================
-// Converts local paths to Firebase Storage CDN URLs.
-// Images are stored in gs://crhomepros.firebasestorage.app/projects/
+// Converts local image paths to Firebase Storage CDN URLs.
+// Gallery data uses paths like '/images/2025-05/kitchen.png'
+// This resolver maps them to the correct Firebase Storage location.
+
+const BUCKET = 'crhomepros.firebasestorage.app'
 
 /**
- * Resolve an image path to Firebase Storage URL.
- * /images/2024-01/img_xxx.JPEG → https://firebasestorage.googleapis.com/v0/b/.../o/projects%2F2024-01%2Fimg_xxx.JPEG?alt=media
+ * Map local /images/ paths to Firebase Storage paths.
+ * 
+ * Firebase Storage structure:
+ *   blog/           ← blog images
+ *   projects/       ← all project images (2024-01, 2024-06, 2025-05, fence, basement)
+ *   site/           ← logo, og-image
+ *   team/           ← team photos
+ */
+function toStoragePath(localPath: string): string {
+  // Strip leading /images/
+  const rel = localPath.replace(/^\/images\//, '')
+
+  // Blog images: /images/blog/x.png → blog/x.png
+  if (rel.startsWith('blog/')) return rel
+
+  // Team photos: /images/team-carlos-01.png → team/team-carlos-01.png
+  if (rel.startsWith('team-')) return `team/${rel}`
+
+  // Logo: /images/logo.png → site/logo.png
+  if (rel === 'logo.png' || rel === 'og-image.jpg') return `site/${rel}`
+
+  // Everything else (project folders): /images/2025-05/x.png → projects/2025-05/x.png
+  return `projects/${rel}`
+}
+
+/**
+ * Resolve an image path to Firebase Storage CDN URL.
  */
 export function resolveImageUrl(localPath: string): string {
   // Already a full URL? Return as-is
@@ -14,30 +42,13 @@ export function resolveImageUrl(localPath: string): string {
     return localPath
   }
 
-  // Only the original 2024 batches live in Firebase Storage.
-  // Everything else (2025+, fence, basement) is in /public/ and serves directly.
-  const firebaseFolders = ['/images/2024-01/', '/images/2024-06/']
-  const isFirebaseImage = firebaseFolders.some(folder => localPath.startsWith(folder))
-  
-  if (!isFirebaseImage) {
-    // Serve directly from /public/ (Next.js static files)
-    return localPath
-  }
-
-  // Convert local path to Firebase Storage path
-  // /images/2024-01/img_1234.JPEG → projects/2024-01/img_1234.JPEG
-  const storagePath = localPath
-    .replace(/^\/images\//, 'projects/')
-    .replace(/^\//, '')
-
+  const storagePath = toStoragePath(localPath)
   const encoded = encodeURIComponent(storagePath)
-  
-  return `https://firebasestorage.googleapis.com/v0/b/crhomepros.firebasestorage.app/o/${encoded}?alt=media`
+  return `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o/${encoded}?alt=media`
 }
 
 /**
- * Resolve all image arrays in a gallery project.
- * Use this when rendering gallery/project components.
+ * Resolve all images in a gallery project.
  */
 export function resolveProjectImages<T extends { images: string[]; beforeImages?: string[] }>(
   project: T
@@ -45,6 +56,31 @@ export function resolveProjectImages<T extends { images: string[]; beforeImages?
   return {
     ...project,
     images: project.images.map(resolveImageUrl),
-    beforeImages: project.beforeImages?.map(resolveImageUrl),
+    ...(project.beforeImages && {
+      beforeImages: project.beforeImages.map(resolveImageUrl),
+    }),
   }
 }
+
+/**
+ * Get Firebase Storage URL for a specific file.
+ */
+export function getStorageUrl(storagePath: string): string {
+  const encoded = encodeURIComponent(storagePath)
+  return `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o/${encoded}?alt=media`
+}
+
+export function getProjectImageUrl(folder: string, filename: string): string {
+  return getStorageUrl(`projects/${folder}/${filename}`)
+}
+
+export function getSiteImageUrl(filename: string): string {
+  return getStorageUrl(`site/${filename}`)
+}
+
+export const STORAGE_PATHS = {
+  projects: 'projects',
+  blog: 'blog',
+  site: 'site',
+  team: 'team',
+} as const
