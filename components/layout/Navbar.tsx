@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { EmergencyModal } from '@/components/EmergencyModal'
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, Phone, ChevronDown, Globe, AlertTriangle } from 'lucide-react'
 import { cn, formatPhoneLink, formatWhatsAppLink } from '@/lib/utils'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
@@ -16,6 +16,19 @@ export function Navbar() {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const pathname = usePathname()
+  const router = useRouter()
+  const currentLocale = pathname.startsWith('/es') ? 'es' : 'en'
+
+  const toggleLocale = () => {
+    if (currentLocale === 'en') {
+      const newPath = '/es' + pathname.replace(/^\/en/, '')
+      router.push(newPath || '/es')
+    } else {
+      const newPath = pathname.replace(/^\/es/, '/en')
+      router.push(newPath || '/en')
+    }
+  }
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,9 +139,13 @@ export function Navbar() {
                 Emergency?
               </button>
 
-              <span className="text-sm font-medium px-3 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30 whitespace-nowrap">
-                ¡Hablamos Español!
-              </span>
+              <button
+                onClick={toggleLocale}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30 hover:bg-gold-500/30 transition-colors whitespace-nowrap text-sm font-medium"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                {currentLocale === 'en' ? 'ES' : 'EN'}
+              </button>
 
               <a
                 href={formatWhatsAppLink(COMPANY.phone, "Hi! I'm interested in your services.")}
@@ -275,9 +292,13 @@ export function Navbar() {
                 <WhatsAppIcon className="w-5 h-5" />
                 WhatsApp Us
               </a>
-              <p className="text-center text-sm text-dark-500 mt-2">
-                ¡Hablamos Español!
-              </p>
+              <button
+                onClick={() => { toggleLocale(); setIsOpen(false); }}
+                className="flex items-center justify-center gap-2 w-full py-2 text-sm font-medium text-dark-500 hover:text-primary-600 transition-colors"
+              >
+                <Globe className="w-4 h-4" />
+                {currentLocale === 'en' ? 'Cambiar a Espa\u00f1ol' : 'Switch to English'}
+              </button>
             </div>
           </div>
         </div>

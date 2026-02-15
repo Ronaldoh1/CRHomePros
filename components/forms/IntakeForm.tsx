@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -59,6 +59,8 @@ export function IntakeForm() {
     handleSubmit,
     watch,
     trigger,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<IntakeFormData>({
     mode: 'onChange',
@@ -70,6 +72,31 @@ export function IntakeForm() {
       flexibleBudget: false,
     },
   })
+
+  // Force-sync browser autocomplete with React Hook Form
+  const syncAutocomplete = useCallback(() => {
+    const fields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'zip']
+    fields.forEach(field => {
+      const el = document.querySelector('[name="' + field + '"]') as HTMLInputElement
+      if (el && el.value && el.value !== getValues(field as any)) {
+        setValue(field as any, el.value, { shouldValidate: true, shouldDirty: true })
+      }
+    })
+  }, [setValue, getValues])
+
+  useEffect(() => {
+    const timer1 = setTimeout(syncAutocomplete, 500)
+    const timer2 = setTimeout(syncAutocomplete, 1500)
+    const handler = () => setTimeout(syncAutocomplete, 100)
+    document.addEventListener('input', handler, true)
+    document.addEventListener('change', handler, true)
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+      document.removeEventListener('input', handler, true)
+      document.removeEventListener('change', handler, true)
+    }
+  }, [currentStep, syncAutocomplete])
 
   const selectedServices = watch('services') || []
 
@@ -87,6 +114,7 @@ export function IntakeForm() {
   }
 
   const nextStep = async () => {
+    syncAutocomplete()
     const isValid = await validateStep()
     if (isValid && currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1)
@@ -455,31 +483,45 @@ export function IntakeForm() {
         )}
 
         {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-8 pt-6 border-t border-dark-100">
-          <button
-            type="button"
-            onClick={prevStep}
-            className={cn("btn-outline text-sm md:text-base px-4 py-2 md:px-6 md:py-3", currentStep === 0 && "invisible")}
-          >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back
-          </button>
+        <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 mt-8 pt-6 border-t border-dark-100">
+          {currentStep > 0 ? (
+            <button
+              type="button"
+              onClick={prevStep}
+              style={{ touchAction: 'manipulation' }}
+              className="flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 text-base font-medium text-dark-600 bg-white border-2 border-dark-200 rounded-xl hover:border-primary-400 hover:text-primary-600 active:scale-[0.98] transition-all cursor-pointer select-none"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Back
+            </button>
+          ) : <div />}
 
           {currentStep < steps.length - 1 ? (
-            <button type="button" onClick={(e) => { e.preventDefault(); nextStep(); }} className="btn-primary text-sm md:text-base px-4 py-2 md:px-6 md:py-3">
+            <button
+              type="button"
+              onClick={(e) => { e.preventDefault(); syncAutocomplete(); setTimeout(nextStep, 50); }}
+              style={{ touchAction: 'manipulation' }}
+              className="flex items-center justify-center gap-2 min-h-[48px] px-8 py-3 text-base font-semibold text-white bg-primary-600 rounded-xl hover:bg-primary-700 active:scale-[0.98] transition-all cursor-pointer select-none shadow-md"
+            >
               Continue
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-5 h-5" />
             </button>
           ) : (
-            <button type="submit" disabled={isSubmitting} className="btn-gold btn-lg text-sm md:text-base px-6 py-3 md:px-8 md:py-4">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              onClick={() => syncAutocomplete()}
+              style={{ touchAction: 'manipulation' }}
+              className="flex items-center justify-center gap-2 min-h-[52px] px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-gold-500 to-gold-600 rounded-xl hover:from-gold-600 hover:to-gold-700 active:scale-[0.98] transition-all cursor-pointer select-none shadow-lg disabled:opacity-50"
+            >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                  <Loader2 className="w-5 h-5 animate-spin" />
                   Submitting...
                 </>
               ) : (
                 <>
-                  <Calendar className="w-5 h-5 mr-2" />
+                  <Calendar className="w-5 h-5" />
                   Request Free Estimate
                 </>
               )}
