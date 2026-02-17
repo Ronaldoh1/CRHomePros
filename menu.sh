@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-# Colors - these MUST be created fresh in the heredoc to avoid corruption
+# Pure, fresh ANSI codes – no copy-paste corruption
+
 RESET='\033[0m'
 BOLD='\033[1m'
 CYAN='\033[36m'
