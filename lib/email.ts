@@ -4,7 +4,13 @@
 import { Resend } from 'resend'
 
 const RESEND_KEY = process.env.RESEND_API_KEY || ''
-const resend = new Resend(RESEND_KEY)
+
+function getResend() {
+  if (!RESEND_KEY || RESEND_KEY.length < 5) {
+    throw new Error('RESEND_API_KEY not configured')
+  }
+  return new Resend(RESEND_KEY)
+}
 
 const FROM_EMAIL = process.env.EMAIL_FROM || 'CR Home Pros <onboarding@resend.dev>'
 const CARLOS_EMAIL = process.env.EMAIL_TO_LEADS || 'crhomepros@gmail.com'
@@ -93,7 +99,7 @@ export async function sendNewLeadNotification(lead: LeadEmailData): Promise<bool
       </div>`
       : ''
 
-    const result = await resend.emails.send({
+    const result = await getResend().emails.send({
       from: FROM_EMAIL,
       to: CARLOS_EMAIL,
       subject: `🔥 ${tag} New Lead: ${lead.firstName} ${lead.lastName} - ${lead.services.join(', ')}`,
@@ -170,7 +176,7 @@ export async function sendLeadConfirmation(customerEmail: string, firstName: str
   }
 
   try {
-    const result = await resend.emails.send({
+    const result = await getResend().emails.send({
       from: FROM_EMAIL,
       to: customerEmail,
       subject: '✅ CR Home Pros — We Received Your Request!',
@@ -215,7 +221,7 @@ export async function sendReferralNotification(referral: ReferralEmailData): Pro
   }
 
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: CARLOS_EMAIL,
       subject: `🤝 New Referral from ${referral.referrerName}: ${referral.referralName}`,
@@ -263,7 +269,7 @@ export async function sendContactFormNotification(data: ContactEmailData): Promi
   }
 
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: CARLOS_EMAIL,
       subject: `💬 New Message from ${data.name}`,

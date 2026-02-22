@@ -9,6 +9,7 @@ import { Menu, X, Phone, ChevronDown, Globe, AlertTriangle } from 'lucide-react'
 import { cn, formatPhoneLink, formatWhatsAppLink } from '@/lib/utils'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
 import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
+import { LanguageSwitcher } from '@/lib/i18n/link'
 import { resolveImageUrl } from '@/lib/resolve-images'
 
 export function Navbar() {
@@ -126,9 +127,9 @@ export function Navbar() {
                 Emergency?
               </button>
 
-              <span className="text-sm font-medium px-3 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30 whitespace-nowrap">
-                ¡Hablamos Español!
-              </span>
+              <LanguageSwitcher
+                className="text-sm font-medium px-3 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/30 whitespace-nowrap hover:bg-gold-500/30 transition-all"
+              />
 
               <a
                 href={formatWhatsAppLink(COMPANY.phone, "Hi! I'm interested in your services.")}
@@ -275,9 +276,9 @@ export function Navbar() {
                 <WhatsAppIcon className="w-5 h-5" />
                 WhatsApp Us
               </a>
-              <p className="text-center text-sm text-dark-500 mt-2">
-                ¡Hablamos Español!
-              </p>
+              <LanguageSwitcher
+                className="block text-center text-sm font-medium text-primary-700 bg-primary-50 py-2.5 rounded-xl hover:bg-primary-100 transition-all"
+              />
             </div>
           </div>
         </div>

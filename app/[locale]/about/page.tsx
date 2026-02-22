@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Shield, Award, Users, Heart, CheckCircle } from 'lucide-react'
 import { COMPANY, SERVICE_AREAS } from '@/lib/constants'
+import { resolveImageUrl } from '@/lib/resolve-images'
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -80,7 +81,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-dark-100">
                 <Image
-                  src="/images/team-carlos-02.png"
+                  src={resolveImageUrl("/images/team-carlos-01.jpg")}
                   alt="Carlos Hernandez - Founder"
                   fill
                   className="object-cover"

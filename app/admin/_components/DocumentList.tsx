@@ -1,0 +1,172 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { getDocumentsByType, deleteDocument, type DocumentRecord } from '@/lib/firebase-auth'
+import { FileText, Trash2, Download, Eye, Send, Loader2, CheckCircle, Clock, DollarSign, Upload } from 'lucide-react'
+import Link from 'next/link'
+
+const STATUS_STYLES: Record<string, string> = {
+  draft: 'bg-slate-500/20 text-slate-400',
+  sent: 'bg-blue-500/20 text-blue-400',
+  signed: 'bg-green-500/20 text-green-400',
+  paid: 'bg-emerald-500/20 text-emerald-400',
+}
+
+const STATUS_ICONS: Record<string, typeof Clock> = {
+  draft: Clock,
+  sent: Send,
+  signed: CheckCircle,
+  paid: DollarSign,
+}
+
+interface DocumentListProps {
+  type: DocumentRecord['type']
+  title: string
+  createHref: string
+  createLabel: string
+}
+
+export function DocumentList({ type, title, createHref, createLabel }: DocumentListProps) {
+  const [docs, setDocs] = useState<DocumentRecord[]>([])
+  const [loading, setLoading] = useState(true)
+  const [deleting, setDeleting] = useState<string | null>(null)
+
+  useEffect(() => {
+    loadDocs()
+  }, [])
+
+  const loadDocs = async () => {
+    try {
+      const data = await getDocumentsByType(type)
+      setDocs(data)
+    } catch (err) {
+      console.error('Failed to load documents:', err)
+    }
+    setLoading(false)
+  }
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this document?')) return
+    setDeleting(id)
+    try {
+      await deleteDocument(id)
+      setDocs(prev => prev.filter(d => d.id !== id))
+    } catch (err) {
+      console.error('Failed to delete:', err)
+    }
+    setDeleting(null)
+  }
+
+  const formatDate = (timestamp: any) => {
+    if (!timestamp) return '—'
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp)
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  }
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+      </div>
+    )
+  }
+
+  return (
+    <div className="p-6 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl font-bold text-white">{title}</h1>
+          <p className="text-slate-400 text-sm mt-1">{docs.length} document{docs.length !== 1 ? 's' : ''}</p>
+        </div>
+        <Link
+          href={createHref}
+          className="px-4 py-2.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all flex items-center gap-2 text-sm"
+        >
+          <FileText className="w-4 h-4" />
+          {createLabel}
+        </Link>
+      </div>
+
+      {docs.length === 0 ? (
+        <div className="bg-slate-800/50 border border-white/5 rounded-2xl p-12 text-center">
+          <FileText className="w-12 h-12 text-slate-600 mx-auto mb-4" />
+          <p className="text-slate-400 text-lg mb-2">No {type.replace('-', ' ')}s yet</p>
+          <p className="text-slate-500 text-sm mb-6">Create your first {type.replace('-', ' ')} to get started.</p>
+          <Link
+            href={createHref}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700"
+          >
+            {createLabel}
+          </Link>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {docs.map((doc) => {
+            const StatusIcon = STATUS_ICONS[doc.status] || Clock
+            return (
+              <div
+                key={doc.id}
+                className="bg-slate-800/50 border border-white/5 rounded-xl p-5 hover:border-white/10 transition-all"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-1.5">
+                      <h3 className="font-semibold text-white truncate">{doc.number}</h3>
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[doc.status]}`}>
+                        <StatusIcon className="w-3 h-3" />
+                        {doc.status}
+                      </span>
+                    </div>
+                    <p className="text-slate-300 text-sm">{doc.clientName}</p>
+                    <p className="text-slate-500 text-xs mt-1">
+                      {doc.projectName} • {formatDate(doc.createdAt)}
+                    </p>
+                  </div>
+
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-lg font-bold text-white">{formatCurrency(doc.total)}</p>
+                    {doc.signedFileUrl && (
+                      <a
+                        href={doc.signedFileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-green-400 flex items-center gap-1 mt-1 justify-end"
+                      >
+                        <CheckCircle className="w-3 h-3" /> Signed
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/5">
+                  {doc.signedFileUrl && (
+                    <a
+                      href={doc.signedFileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs px-3 py-1.5 rounded-lg bg-green-600/20 text-green-400 hover:bg-green-600/30 flex items-center gap-1.5"
+                    >
+                      <Download className="w-3 h-3" /> Download Signed
+                    </a>
+                  )}
+                  <button
+                    onClick={() => doc.id && handleDelete(doc.id)}
+                    disabled={deleting === doc.id}
+                    className="text-xs px-3 py-1.5 rounded-lg bg-red-600/10 text-red-400 hover:bg-red-600/20 flex items-center gap-1.5 ml-auto"
+                  >
+                    {deleting === doc.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Trash2 className="w-3 h-3" />}
+                    Delete
+                  </button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
