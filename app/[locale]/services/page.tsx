@@ -35,7 +35,7 @@ export default function ServicesPage() {
                 Services
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               From minor repairs to major renovations, our skilled team handles every aspect of your 
               home improvement project with precision and care.
             </p>

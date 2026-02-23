@@ -124,7 +124,7 @@ export default function ChangeOrdersPage() {
             <ClipboardList className="w-6 h-6 text-blue-400" />
             {co.isCorrection ? 'Corrected Change Order' : 'Create Change Order'}
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Document additional work for existing contracts</p>
+          <p className="text-slate-300 text-sm mt-1">Document additional work for existing contracts</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <Link href="/admin/change-orders/sent" className="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 text-sm hover:bg-slate-700 flex items-center gap-2"><FileText className="w-4 h-4" /> Sent</Link>
@@ -177,7 +177,7 @@ export default function ChangeOrdersPage() {
             <div className="space-y-3">
               {co.items.map((item, idx) => (
                 <div key={item.id} className="flex gap-3 items-start">
-                  <span className="text-slate-500 text-sm mt-3 w-6 text-right flex-shrink-0">{idx + 1}.</span>
+                  <span className="text-slate-300 text-sm mt-3 w-6 text-right flex-shrink-0">{idx + 1}.</span>
                   <div className="flex-1 grid sm:grid-cols-[1fr_120px] gap-3">
                     <input value={item.description} onChange={e => updateItem(item.id, 'description', e.target.value)} placeholder="Power wash garage brick walls and columns" className={ic} />
                     <input type="number" value={item.unitPrice || ''} onChange={e => updateItem(item.id, 'unitPrice', Number(e.target.value))} className={ic + ' text-right'} placeholder="$ 0.00" step="0.01" />
@@ -189,9 +189,9 @@ export default function ChangeOrdersPage() {
             <button onClick={addItem} className="mt-4 flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 px-3 py-2 rounded-lg hover:bg-blue-600/10"><Plus className="w-4 h-4" /> Add Change Item</button>
 
             <div className="mt-6 pt-4 border-t border-white/5 space-y-2 text-right text-sm">
-              <div className="text-slate-400">Change Order Total: <span className="text-white font-medium ml-2">{fmt(changeTotal)}</span></div>
-              <div className="text-slate-400">Previous Contract: <span className="text-white font-medium ml-2">{fmt(co.previousContractAmount)}</span></div>
-              {co.depositAmount > 0 && <div className="text-slate-400">Deposit: <span className="text-green-400 font-medium ml-2">-{fmt(co.depositAmount)}</span></div>}
+              <div className="text-slate-300">Change Order Total: <span className="text-white font-medium ml-2">{fmt(changeTotal)}</span></div>
+              <div className="text-slate-300">Previous Contract: <span className="text-white font-medium ml-2">{fmt(co.previousContractAmount)}</span></div>
+              {co.depositAmount > 0 && <div className="text-slate-300">Deposit: <span className="text-green-400 font-medium ml-2">-{fmt(co.depositAmount)}</span></div>}
               <div className="text-lg font-bold text-white pt-2 border-t border-white/10">Total After Change Order: {fmt(totalAfterChange)}</div>
             </div>
           </div>

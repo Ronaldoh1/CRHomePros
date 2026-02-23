@@ -90,7 +90,7 @@ export function MeetCarlos() {
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-dark-900/80 to-transparent p-3">
                 <p className="text-white text-sm font-semibold">{t.meetCarlos.teamLabel1}</p>
-                <p className="text-white/60 text-xs">{t.meetCarlos.teamSub1}</p>
+                <p className="text-white/80 text-xs">{t.meetCarlos.teamSub1}</p>
               </div>
             </div>
             <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
@@ -102,7 +102,7 @@ export function MeetCarlos() {
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-dark-900/80 to-transparent p-3">
                 <p className="text-white text-sm font-semibold">{t.meetCarlos.teamLabel2}</p>
-                <p className="text-white/60 text-xs">{t.meetCarlos.teamSub2}</p>
+                <p className="text-white/80 text-xs">{t.meetCarlos.teamSub2}</p>
               </div>
             </div>
             <div className="relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg bg-primary-100 flex items-center justify-center">

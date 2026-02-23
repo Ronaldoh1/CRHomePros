@@ -118,7 +118,7 @@ export default function ReferralsPage() {
                 Share the Rewards
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed mb-8">
+            <p className="text-xl text-white/90 leading-relaxed mb-8">
               Know someone who needs home improvement? Refer them to CR Home Pros and earn up to 
               <span className="text-gold-400 font-bold"> $750+ </span> 
               for every completed project!

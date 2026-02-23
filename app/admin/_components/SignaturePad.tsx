@@ -187,7 +187,7 @@ export function SignaturePad({ onSignatureChange, savedSignatureUrl, label = 'Si
         />
       )}
       {!hasDrawn && !useSaved && (
-        <p className="text-xs text-slate-500 text-center">Draw your signature above</p>
+        <p className="text-xs text-slate-400 text-center">Draw your signature above</p>
       )}
     </div>
   )

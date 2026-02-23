@@ -175,7 +175,7 @@ export default function AdminImagesPage() {
           <h1 className="text-3xl font-bold">
             <span className="text-gold-500">📸</span> Image Manager
           </h1>
-          <p className="text-dark-400 mt-2">
+          <p className="text-dark-200 mt-2">
             Drag & drop project photos to upload them all to Firebase Storage at once.
           </p>
         </div>
@@ -185,7 +185,7 @@ export default function AdminImagesPage() {
           <h2 className="text-lg font-semibold mb-4">Project Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-dark-400 mb-1">Category</label>
+              <label className="block text-sm text-dark-200 mb-1">Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -197,17 +197,17 @@ export default function AdminImagesPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm text-dark-400 mb-1">Project Name</label>
+              <label className="block text-sm text-dark-200 mb-1">Project Name</label>
               <input
                 type="text"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
                 placeholder="e.g. Kitchen Remodel — PG County"
-                className="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-xl text-white placeholder:text-dark-500 focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-xl text-white placeholder:text-dark-400 focus:ring-2 focus:ring-gold-500 focus:border-transparent"
               />
             </div>
           </div>
-          <p className="text-xs text-dark-500 mt-3">
+          <p className="text-xs text-dark-300 mt-3">
             <FolderOpen className="w-3 h-3 inline mr-1" />
             Storage path: <code className="text-gold-500">{getFolder()}/</code>
           </p>
@@ -230,11 +230,11 @@ export default function AdminImagesPage() {
             className="hidden"
             onChange={(e) => e.target.files && addFiles(e.target.files)}
           />
-          <ImagePlus className="w-16 h-16 mx-auto text-dark-500 mb-4" />
-          <p className="text-lg font-medium text-dark-300">
+          <ImagePlus className="w-16 h-16 mx-auto text-dark-300 mb-4" />
+          <p className="text-lg font-medium text-dark-100">
             Drop photos here or click to browse
           </p>
-          <p className="text-sm text-dark-500 mt-2">
+          <p className="text-sm text-dark-300 mt-2">
             Supports JPG, PNG, WebP • Select as many as you want
           </p>
         </div>
@@ -247,14 +247,14 @@ export default function AdminImagesPage() {
                 <h2 className="text-lg font-semibold">
                   {files.length} photo{files.length !== 1 ? 's' : ''} selected
                 </h2>
-                <span className="text-sm text-dark-400">
+                <span className="text-sm text-dark-200">
                   ({(totalSize / 1024 / 1024).toFixed(1)} MB)
                 </span>
               </div>
               <div className="flex gap-3">
                 <button
                   onClick={clearAll}
-                  className="px-4 py-2 text-sm rounded-lg bg-dark-700 hover:bg-dark-600 text-dark-300 transition-colors"
+                  className="px-4 py-2 text-sm rounded-lg bg-dark-700 hover:bg-dark-600 text-dark-100 transition-colors"
                 >
                   <Trash2 className="w-4 h-4 inline mr-1" /> Clear All
                 </button>
@@ -264,7 +264,7 @@ export default function AdminImagesPage() {
                   className={cn(
                     'px-6 py-2 text-sm font-semibold rounded-lg transition-all flex items-center gap-2',
                     uploading || pendingCount === 0
-                      ? 'bg-dark-700 text-dark-500 cursor-not-allowed'
+                      ? 'bg-dark-700 text-dark-300 cursor-not-allowed'
                       : 'bg-gold-500 text-dark-900 hover:bg-gold-400'
                   )}
                 >
@@ -355,8 +355,8 @@ export default function AdminImagesPage() {
 
                   {/* File name */}
                   <div className="p-2 bg-dark-800">
-                    <p className="text-xs text-dark-400 truncate">{fileObj.file.name}</p>
-                    <p className="text-xs text-dark-500">{(fileObj.file.size / 1024).toFixed(0)} KB</p>
+                    <p className="text-xs text-dark-200 truncate">{fileObj.file.name}</p>
+                    <p className="text-xs text-dark-300">{(fileObj.file.size / 1024).toFixed(0)} KB</p>
                   </div>
                 </div>
               ))}
@@ -376,7 +376,7 @@ export default function AdminImagesPage() {
                         <code className="text-green-400 flex-1 truncate">{f.url}</code>
                         <button
                           onClick={() => navigator.clipboard.writeText(f.url || '')}
-                          className="text-dark-400 hover:text-white flex-shrink-0 px-2 py-1 rounded bg-dark-700 text-xs"
+                          className="text-dark-200 hover:text-white flex-shrink-0 px-2 py-1 rounded bg-dark-700 text-xs"
                         >
                           Copy
                         </button>
@@ -391,15 +391,15 @@ export default function AdminImagesPage() {
         {/* Instructions */}
         <div className="bg-dark-800/50 rounded-2xl p-6 border border-dark-700">
           <h3 className="font-semibold text-gold-500 mb-3">💡 How it works</h3>
-          <div className="space-y-2 text-sm text-dark-400">
+          <div className="space-y-2 text-sm text-dark-200">
             <p>1. Select a <strong className="text-dark-200">category</strong> and name the project</p>
             <p>2. <strong className="text-dark-200">Drag & drop</strong> all photos at once (or click to browse)</p>
             <p>3. Hit <strong className="text-dark-200">Upload</strong> — all photos go to Firebase Storage in one click</p>
             <p>4. Copy the generated URLs into the gallery data to add them to the site</p>
           </div>
           <div className="mt-4 p-3 bg-dark-900 rounded-lg">
-            <p className="text-xs text-dark-500">
-              <strong className="text-dark-300">Storage:</strong> Firebase free tier gives you 5 GB — enough for 5,000+ project photos.
+            <p className="text-xs text-dark-300">
+              <strong className="text-dark-100">Storage:</strong> Firebase free tier gives you 5 GB — enough for 5,000+ project photos.
               Currently using ~{(totalSize / 1024 / 1024).toFixed(1) || '0'} MB.
             </p>
           </div>

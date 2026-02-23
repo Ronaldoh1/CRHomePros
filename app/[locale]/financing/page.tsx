@@ -184,7 +184,7 @@ export default function FinancingPage() {
       <section className="container-custom">
         <div className="bg-gradient-to-br from-dark-900 to-dark-800 rounded-3xl p-10 text-center text-white">
           <h2 className="text-3xl font-display font-bold mb-4">{t.financing.cta}</h2>
-          <p className="text-dark-300 mb-8 max-w-xl mx-auto">{t.financing.ctaDesc}</p>
+          <p className="text-dark-100 mb-8 max-w-xl mx-auto">{t.financing.ctaDesc}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={formatPhoneLink(COMPANY.phone)}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { logContactInDrive, isDriveConfigured } from '@/lib/google-drive'
 import { sendContactFormNotification } from '@/lib/email'
+import { saveContact } from '@/lib/firebase-admin-server'
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,6 +16,13 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(`\n💬 New Contact: ${name}`)
+
+    // Save to Firebase (primary data store)
+    try {
+      await saveContact({ name, email, phone, message, service })
+    } catch (fbError: any) {
+      console.error('❌ Firebase save error (non-fatal):', fbError?.message || fbError)
+    }
 
     // Log to Google Drive
     if (isDriveConfigured()) {

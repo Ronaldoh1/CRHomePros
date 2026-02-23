@@ -64,7 +64,7 @@ export default function AboutPage() {
                 One Home at a Time
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               For over {COMPANY.yearsInBusiness} years, CR Home Pros has been transforming houses into 
               dream homes across the DMV area. We're not just contractors—we're craftsmen who take 
               pride in every project.

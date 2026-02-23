@@ -89,7 +89,7 @@ export default function ProjectsPage() {
                 Gallery
               </span>
             </h1>
-            <p className="text-xl text-white/70">
+            <p className="text-xl text-white/90">
               Browse our completed projects and see the quality craftsmanship we bring to every home.
             </p>
           </div>
@@ -239,7 +239,7 @@ export default function ProjectsPage() {
         >
           {/* Close Button */}
           <button 
-            className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute top-4 right-4 p-2 text-white/90 hover:text-white transition-colors z-10"
             onClick={closeLightbox}
           >
             <X className="w-8 h-8" />
@@ -247,13 +247,13 @@ export default function ProjectsPage() {
 
           {/* Navigation Buttons */}
           <button 
-            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 text-white/90 hover:text-white transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); navigateLightbox('prev'); }}
           >
             <ChevronLeft className="w-10 h-10" />
           </button>
           <button 
-            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 text-white/90 hover:text-white transition-colors z-10"
             onClick={(e) => { e.stopPropagation(); navigateLightbox('next'); }}
           >
             <ChevronRight className="w-10 h-10" />
@@ -273,7 +273,7 @@ export default function ProjectsPage() {
           </div>
 
           {/* Image Counter */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/90 text-sm">
             {lightboxImage.index + 1} / {GALLERY_PROJECTS.find(p => p.id === lightboxImage.projectId)?.images.length}
           </div>
         </div>

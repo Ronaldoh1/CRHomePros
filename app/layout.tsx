@@ -67,8 +67,8 @@ const jsonLd = {
     { '@type': 'City', name: 'Washington, DC' },
   ],
   priceRange: '$$',
-  image: META.url + '/images/logo.png',
-  logo: META.url + '/images/logo.png',
+  image: `https://firebasestorage.googleapis.com/v0/b/crhomepros.firebasestorage.app/o/site%2Flogo.png?alt=media`,
+  logo: `https://firebasestorage.googleapis.com/v0/b/crhomepros.firebasestorage.app/o/site%2Flogo.png?alt=media`,
   foundingDate: '2004',
   slogan: COMPANY.tagline,
   knowsLanguage: ['en', 'es'],
@@ -138,7 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="CR Home Pros" />
-        <link rel="apple-touch-icon" href="/images/logo.png" />
+        <link rel="apple-touch-icon" href="https://firebasestorage.googleapis.com/v0/b/crhomepros.firebasestorage.app/o/site%2Flogo.png?alt=media" />
       </head>
       <body className="font-sans antialiased">
         <Suspense fallback={null}>

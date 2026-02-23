@@ -41,7 +41,7 @@ export function CallToAction() {
           </h2>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/70 mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed">
             {t.cta.subtitle}
           </p>
 
@@ -75,7 +75,7 @@ export function CallToAction() {
             href={formatWhatsAppLink(COMPANY.phone, t.common.whatsappGreeting)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors"
           >
             <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
             <span>{t.cta.orWhatsApp}</span>
@@ -84,7 +84,7 @@ export function CallToAction() {
           {/* Service Areas */}
           <div className="mt-12 pt-8 border-t border-white/10">
             <p className="text-sm text-white/50 mb-3">{t.cta.proudlyServing}</p>
-            <p className="text-white/70">
+            <p className="text-white/90">
               {SERVICE_AREAS.slice(0, 6).join(' • ')} {t.cta.andSurrounding}
             </p>
           </div>

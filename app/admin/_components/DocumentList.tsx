@@ -80,7 +80,7 @@ export function DocumentList({ type, title, createHref, createLabel }: DocumentL
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold text-white">{title}</h1>
-          <p className="text-slate-400 text-sm mt-1">{docs.length} document{docs.length !== 1 ? 's' : ''}</p>
+          <p className="text-slate-300 text-sm mt-1">{docs.length} document{docs.length !== 1 ? 's' : ''}</p>
         </div>
         <Link
           href={createHref}
@@ -94,8 +94,8 @@ export function DocumentList({ type, title, createHref, createLabel }: DocumentL
       {docs.length === 0 ? (
         <div className="bg-slate-800/50 border border-white/5 rounded-2xl p-12 text-center">
           <FileText className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-          <p className="text-slate-400 text-lg mb-2">No {type.replace('-', ' ')}s yet</p>
-          <p className="text-slate-500 text-sm mb-6">Create your first {type.replace('-', ' ')} to get started.</p>
+          <p className="text-slate-300 text-lg mb-2">No {type.replace('-', ' ')}s yet</p>
+          <p className="text-slate-400 text-sm mb-6">Create your first {type.replace('-', ' ')} to get started.</p>
           <Link
             href={createHref}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700"
@@ -122,7 +122,7 @@ export function DocumentList({ type, title, createHref, createLabel }: DocumentL
                       </span>
                     </div>
                     <p className="text-slate-300 text-sm">{doc.clientName}</p>
-                    <p className="text-slate-500 text-xs mt-1">
+                    <p className="text-slate-400 text-xs mt-1">
                       {doc.projectName} • {formatDate(doc.createdAt)}
                     </p>
                   </div>

@@ -109,7 +109,7 @@ export default function EstimateCostPage() {
             <p className="text-5xl font-bold mb-1">
               ${tier.min.toLocaleString()} – ${tier.max.toLocaleString()}
             </p>
-            <p className="text-primary-300 mb-6">
+            <p className="text-primary-100 mb-6">
               {isEs ? tier.descriptionEs : tier.description} • {isEs ? service!.nameEs : service!.name}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -146,7 +146,7 @@ export default function EstimateCostPage() {
       <section className="container-custom">
         <div className="bg-gradient-to-br from-dark-900 to-dark-800 rounded-3xl p-10 text-center text-white">
           <h2 className="text-3xl font-display font-bold mb-4">{t.quoteEstimator.getExactQuote}</h2>
-          <p className="text-dark-300 mb-8 max-w-xl mx-auto">
+          <p className="text-dark-100 mb-8 max-w-xl mx-auto">
             {isEs
               ? 'Cada proyecto es único. Contáctanos para una visita gratis a domicilio y un presupuesto detallado sin compromiso.'
               : 'Every project is unique. Contact us for a free in-home visit and a detailed quote — no obligation.'}

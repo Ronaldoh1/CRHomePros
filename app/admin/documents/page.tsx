@@ -69,7 +69,7 @@ export default function SignedDocumentsPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-3"><FileSignature className="w-6 h-6 text-green-400" /> Signed Documents</h1>
-          <p className="text-slate-400 text-sm mt-1">Upload and manage signed documents</p>
+          <p className="text-slate-300 text-sm mt-1">Upload and manage signed documents</p>
         </div>
       </div>
 
@@ -94,7 +94,7 @@ export default function SignedDocumentsPage() {
                     <span className="font-semibold text-white">{doc.number}</span>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${typeBadge(doc.type)}`}>{typeLabel(doc.type)}</span>
                   </div>
-                  <p className="text-slate-400 text-sm">{doc.clientName} • {fmt(doc.total)} • {formatDate(doc.createdAt)}</p>
+                  <p className="text-slate-300 text-sm">{doc.clientName} • {fmt(doc.total)} • {formatDate(doc.createdAt)}</p>
                 </div>
                 <a href={doc.signedFileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-600/20 text-green-400 hover:bg-green-600/30 text-sm font-medium">
                   <Download className="w-4 h-4" /> View Signed
@@ -118,7 +118,7 @@ export default function SignedDocumentsPage() {
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${typeBadge(doc.type)}`}>{typeLabel(doc.type)}</span>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${doc.status === 'sent' ? 'bg-blue-500/20 text-blue-400' : 'bg-slate-500/20 text-slate-400'}`}>{doc.status}</span>
                   </div>
-                  <p className="text-slate-400 text-sm">{doc.clientName} • {fmt(doc.total)} • {formatDate(doc.createdAt)}</p>
+                  <p className="text-slate-300 text-sm">{doc.clientName} • {fmt(doc.total)} • {formatDate(doc.createdAt)}</p>
                 </div>
                 <button
                   onClick={() => doc.id && triggerUpload(doc.id, doc.type)}

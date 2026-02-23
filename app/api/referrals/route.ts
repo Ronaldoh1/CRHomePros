@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createReferralInDrive, isDriveConfigured } from '@/lib/google-drive'
 import { sendReferralNotification } from '@/lib/email'
+import { saveReferral } from '@/lib/firebase-admin-server'
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,6 +13,20 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(`\n🤝 New Referral: ${referrerName} → ${referralName}`)
+
+    // Save to Firebase (primary data store)
+    try {
+      await saveReferral({
+        referrerName, referrerEmail, referrerPhone,
+        referralName, referralPhone,
+        referralEmail: referralEmail || '',
+        projectType: projectType || '',
+        projectDetails: projectDetails || '',
+        paymentMethod: paymentMethod || 'Not specified',
+      })
+    } catch (fbError: any) {
+      console.error('❌ Firebase save error (non-fatal):', fbError?.message || fbError)
+    }
 
     if (isDriveConfigured()) {
       try {

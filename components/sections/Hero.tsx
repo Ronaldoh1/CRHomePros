@@ -218,7 +218,7 @@ export function Hero() {
                     </span>
                   ))}
                 </h1>
-                <p className="text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl leading-relaxed">
+                <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-2xl leading-relaxed">
                   {slide.subtitle}
                 </p>
               </div>
@@ -274,7 +274,7 @@ export function Hero() {
       </div>
 
       {/* Slide Counter - shows current slide number */}
-      <div className="absolute bottom-8 right-8 z-20 hidden lg:flex items-center gap-2 text-white/60 text-sm font-medium">
+      <div className="absolute bottom-8 right-8 z-20 hidden lg:flex items-center gap-2 text-white/80 text-sm font-medium">
         <span className="text-white">{String(currentSlide + 1).padStart(2, '0')}</span>
         <span>/</span>
         <span>{String(slides.length).padStart(2, '0')}</span>

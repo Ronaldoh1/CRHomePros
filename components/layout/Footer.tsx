@@ -12,9 +12,9 @@ import {
   Instagram,
 } from 'lucide-react'
 import { COMPANY, HOURS, SERVICES, SOCIAL, SERVICE_AREAS } from '@/lib/constants'
-import { formatPhoneLink, formatWhatsAppLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/ui/WhatsAppIcon'
 import { useTranslation, useLocale } from '@/lib/i18n/provider'
+import { useSiteSettings } from '@/lib/site-settings-provider'
 
 // TikTok icon (not in Lucide)
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -54,10 +54,25 @@ const NAV_ITEMS: { key: string; href: string; badge?: string }[] = [
 export function Footer() {
   const t = useTranslation()
   const { locale } = useLocale()
+  const ss = useSiteSettings()
   const lp = (path: string) => `/${locale}${path}`
   const currentYear = new Date().getFullYear()
 
   const quickServices = SERVICES.slice(0, 6)
+
+  // Use Firebase settings with fallback to constants
+  const phone = ss.contact.phone || COMPANY.phoneFormatted
+  const email = ss.contact.email || COMPANY.email
+  const whatsappUrl = ss.contact.whatsappUrl
+  const city = ss.contact.city || COMPANY.address.city
+  const state = ss.contact.state || COMPANY.address.state
+  const hours = ss.contact.hours || HOURS.weekday
+  const hoursNote = ss.contact.hoursNote || 'Mon – Sat'
+  const fbUrl = ss.social.facebook || SOCIAL.facebook
+  const igUrl = ss.social.instagram || SOCIAL.instagram
+  const ttUrl = ss.social.tiktok || SOCIAL.tiktok
+  const serviceAreas = ss.serviceAreas.length > 0 ? ss.serviceAreas : SERVICE_AREAS
+  const paymentMethods = ss.paymentMethods.length > 0 ? ss.paymentMethods : ['Credit Cards', 'Zelle', 'Venmo', 'Check']
 
   return (
     <footer className="bg-dark-900 text-white">
@@ -77,13 +92,13 @@ export function Footer() {
                 unoptimized
               />
             </div>
-            <p className="text-dark-300 text-sm leading-relaxed mb-6">
+            <p className="text-dark-200 text-sm leading-relaxed mb-6">
               {t.footer.description}
             </p>
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <a
-                href={SOCIAL.facebook}
+                href={fbUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
@@ -92,7 +107,7 @@ export function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href={SOCIAL.instagram}
+                href={igUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
@@ -101,7 +116,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href={SOCIAL.tiktok}
+                href={ttUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
@@ -120,7 +135,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={lp(item.href)}
-                    className="text-dark-300 hover:text-white hover:pl-1 transition-all duration-200"
+                    className="text-dark-200 hover:text-white hover:pl-1 transition-all duration-200"
                   >
                     {(t.nav as Record<string, string>)[item.key] || item.key}
                   </Link>
@@ -148,7 +163,7 @@ export function Footer() {
                   <li key={service.id}>
                     <Link
                       href={lp(`/services/${service.id}`)}
-                      className="text-dark-300 hover:text-white hover:pl-1 transition-all duration-200"
+                      className="text-dark-200 hover:text-white hover:pl-1 transition-all duration-200"
                     >
                       {translated?.name || service.name}
                     </Link>
@@ -172,22 +187,22 @@ export function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href={formatPhoneLink(COMPANY.phone)}
-                  className="flex items-start gap-3 text-dark-300 hover:text-white transition-colors group"
+                  href={`tel:${phone.replace(/[^\d+]/g, '')}`}
+                  className="flex items-start gap-3 text-dark-200 hover:text-white transition-colors group"
                 >
                   <Phone className="w-5 h-5 mt-0.5 text-gold-500 group-hover:scale-110 transition-transform" />
                   <div>
-                    <p className="font-medium text-white">{COMPANY.phoneFormatted}</p>
+                    <p className="font-medium text-white">{phone}</p>
                     <p className="text-sm">{t.footer.emergencyOnCall}</p>
                   </div>
                 </a>
               </li>
               <li>
                 <a
-                  href={formatWhatsAppLink(COMPANY.phone, t.common.whatsappGreeting)}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-dark-300 hover:text-white transition-colors group"
+                  className="flex items-start gap-3 text-dark-200 hover:text-white transition-colors group"
                 >
                   <WhatsAppIcon className="w-5 h-5 mt-0.5 text-[#25D366] group-hover:scale-110 transition-transform" />
                   <div>
@@ -198,28 +213,28 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`mailto:${COMPANY.email}`}
-                  className="flex items-start gap-3 text-dark-300 hover:text-white transition-colors group"
+                  href={`mailto:${email}`}
+                  className="flex items-start gap-3 text-dark-200 hover:text-white transition-colors group"
                 >
                   <Mail className="w-5 h-5 mt-0.5 text-gold-500 group-hover:scale-110 transition-transform" />
-                  <span>{COMPANY.email}</span>
+                  <span>{email}</span>
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-dark-300">
+                <div className="flex items-start gap-3 text-dark-200">
                   <MapPin className="w-5 h-5 mt-0.5 text-gold-500" />
                   <div>
                     <p>{t.contact.info.serving}</p>
-                    <p className="text-sm">{COMPANY.address.city}, {COMPANY.address.state}</p>
+                    <p className="text-sm">{city}, {state}</p>
                   </div>
                 </div>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-dark-300">
+                <div className="flex items-start gap-3 text-dark-200">
                   <Clock className="w-5 h-5 mt-0.5 text-gold-500" />
                   <div>
-                    <p>{HOURS.weekday}</p>
-                    <p className="text-sm">{t.footer.monSat}</p>
+                    <p>{hours}</p>
+                    <p className="text-sm">{hoursNote}</p>
                   </div>
                 </div>
               </li>
@@ -234,22 +249,22 @@ export function Footer() {
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
             <div className="text-center">
               <p className="text-2xl font-bold text-gold-400">{t.stats.years}</p>
-              <p className="text-sm text-dark-300">{t.footer.yearsServingDMV}</p>
+              <p className="text-sm text-dark-200">{t.footer.yearsServingDMV}</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-white/10" />
             <div className="text-center">
               <p className="text-2xl font-bold text-gold-400">{t.stats.projects}</p>
-              <p className="text-sm text-dark-300">{t.stats.projectsLabel}</p>
+              <p className="text-sm text-dark-200">{t.stats.projectsLabel}</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-white/10" />
             <div className="text-center">
               <p className="text-2xl font-bold text-gold-400">{COMPANY.license}</p>
-              <p className="text-sm text-dark-300">{t.common.licensedInsured}</p>
+              <p className="text-sm text-dark-200">{t.common.licensedInsured}</p>
             </div>
             <div className="hidden md:block w-px h-12 bg-white/10" />
             <div className="text-center">
               <p className="text-2xl font-bold text-gold-400">{t.stats.satisfaction}</p>
-              <p className="text-sm text-dark-300">{t.stats.satisfactionLabel}</p>
+              <p className="text-sm text-dark-200">{t.stats.satisfactionLabel}</p>
             </div>
           </div>
         </div>
@@ -258,9 +273,9 @@ export function Footer() {
       {/* Service Areas Bar */}
       <div className="border-t border-white/10">
         <div className="container-custom py-6">
-          <p className="text-center text-sm text-dark-300">
+          <p className="text-center text-sm text-dark-200">
             <span className="text-white font-semibold">{t.common.servingAreas}: </span>
-            {SERVICE_AREAS.slice(0, 8).join(' • ')}
+            {serviceAreas.slice(0, 8).join(' • ')}
             <span className="text-gold-400 font-medium"> {t.common.surroundingAreas}</span>
           </p>
         </div>
@@ -269,20 +284,15 @@ export function Footer() {
       {/* Payment & Sustainability */}
       <div className="border-t border-white/10">
         <div className="container-custom py-5">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-dark-300">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-dark-200">
             <div className="flex items-center gap-3 flex-wrap justify-center">
               <span className="font-semibold text-white">{t.footer.weAccept}:</span>
-              <span>{t.payment.methods.creditCards}</span>
-              <span className="text-dark-500">•</span>
-              <span>{t.payment.methods.zelle}</span>
-              <span className="text-dark-500">•</span>
-              <span>{t.payment.methods.venmo}</span>
-              <span className="text-dark-500">•</span>
-              <span>{t.payment.methods.check}</span>
-              <span className="text-dark-500">•</span>
-              <span>{t.payment.methods.klarna}</span>
-              <span className="text-dark-500">•</span>
-              <span className="text-gold-400 font-medium">{t.payment.methods.insurance}</span>
+              {paymentMethods.map((method, idx) => (
+                <span key={method}>
+                  {idx > 0 && <span className="text-dark-400 mr-3">•</span>}
+                  <span className={idx === paymentMethods.length - 1 ? "text-gold-400 font-medium" : ""}>{method}</span>
+                </span>
+              ))}
             </div>
             <Link href={lp('/green')} className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
               <span>🌿</span>
@@ -295,10 +305,10 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10 bg-dark-950">
         <div className="container-custom py-5">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-dark-300">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-dark-200">
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
               <p>© {currentYear} {COMPANY.legalName}</p>
-              <span className="hidden md:inline text-dark-500">•</span>
+              <span className="hidden md:inline text-dark-400">•</span>
               <p className="font-medium">{COMPANY.license}</p>
             </div>
             <div className="flex items-center gap-6">

@@ -115,7 +115,7 @@ export default function EstimatePage() {
                 Calculator
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               Get a ballpark estimate for your project in seconds. For an accurate quote, 
               schedule a free consultation.
             </p>

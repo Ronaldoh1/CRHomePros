@@ -301,3 +301,140 @@ export async function uploadSignedDocument(
 
 // Export
 export { ADMIN_EMAIL, ensureAuth, ensureDb, ensureStorage }
+
+// ── Reviews Management ──────────────────────
+
+export interface ReviewRecord {
+  id?: string
+  name: string
+  email: string
+  location: string
+  service: string
+  rating: number
+  text: string
+  recommend?: boolean
+  projectYear?: string
+  approved: boolean
+  createdAt?: any
+  updatedAt?: any
+}
+
+export async function getReviews(approvedOnly = false): Promise<ReviewRecord[]> {
+  const db = requireDb()
+  let q
+  if (approvedOnly) {
+    q = query(collection(db, 'reviews'), where('approved', '==', true), orderBy('createdAt', 'desc'))
+  } else {
+    q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'))
+  }
+  const snap = await getDocs(q)
+  return snap.docs.map(d => ({ ...d.data(), id: d.id } as ReviewRecord))
+}
+
+export async function approveReview(id: string, approved: boolean): Promise<void> {
+  const db = requireDb()
+  await setDoc(doc(db, 'reviews', id), { approved, updatedAt: serverTimestamp() }, { merge: true })
+}
+
+export async function deleteReview(id: string): Promise<void> {
+  const db = requireDb()
+  await deleteDoc(doc(db, 'reviews', id))
+}
+
+// ── Leads / Contacts / Referrals ──────────────
+
+export interface LeadRecord {
+  id?: string
+  firstName?: string
+  lastName?: string
+  name?: string
+  email: string
+  phone: string
+  address?: string
+  city?: string
+  state?: string
+  zip?: string
+  services?: string[]
+  projectDescription?: string
+  timeline?: string
+  budget?: string
+  message?: string
+  service?: string
+  status: string
+  source: string
+  createdAt?: any
+}
+
+export async function getLeads(): Promise<LeadRecord[]> {
+  const db = requireDb()
+  const q = query(collection(db, 'leads'), orderBy('createdAt', 'desc'))
+  const snap = await getDocs(q)
+  return snap.docs.map(d => ({ ...d.data(), id: d.id } as LeadRecord))
+}
+
+export async function getContacts(): Promise<LeadRecord[]> {
+  const db = requireDb()
+  const q = query(collection(db, 'contacts'), orderBy('createdAt', 'desc'))
+  const snap = await getDocs(q)
+  return snap.docs.map(d => ({ ...d.data(), id: d.id } as LeadRecord))
+}
+
+export async function getReferrals(): Promise<any[]> {
+  const db = requireDb()
+  const q = query(collection(db, 'referrals'), orderBy('createdAt', 'desc'))
+  const snap = await getDocs(q)
+  return snap.docs.map(d => ({ ...d.data(), id: d.id }))
+}
+
+export async function updateLeadStatus(id: string, status: string, collectionName = 'leads'): Promise<void> {
+  const db = requireDb()
+  await setDoc(doc(db, collectionName, id), { status, updatedAt: serverTimestamp() }, { merge: true })
+}
+
+// ── Field Notes ──────────────────────
+
+export interface FieldNoteRecord {
+  id?: string
+  projectName: string
+  clientName: string
+  address: string
+  serviceType: string
+  notes: string
+  measurements?: string
+  materialsNeeded?: string
+  estimatedCost?: string
+  nextSteps?: string
+  photos: string[]
+  status: 'draft' | 'complete'
+  createdAt?: any
+  updatedAt?: any
+}
+
+const FIELD_NOTES_COLLECTION = 'field_notes'
+
+export async function saveFieldNote(noteData: FieldNoteRecord): Promise<string> {
+  const db = requireDb()
+  const docRef = noteData.id
+    ? doc(db, FIELD_NOTES_COLLECTION, noteData.id)
+    : doc(collection(db, FIELD_NOTES_COLLECTION))
+
+  await setDoc(docRef, {
+    ...noteData,
+    id: docRef.id,
+    updatedAt: serverTimestamp(),
+    ...(noteData.id ? {} : { createdAt: serverTimestamp() }),
+  }, { merge: true })
+  return docRef.id
+}
+
+export async function getFieldNotes(): Promise<FieldNoteRecord[]> {
+  const db = requireDb()
+  const q = query(collection(db, FIELD_NOTES_COLLECTION), orderBy('createdAt', 'desc'))
+  const snap = await getDocs(q)
+  return snap.docs.map(d => ({ ...d.data(), id: d.id } as FieldNoteRecord))
+}
+
+export async function deleteFieldNote(id: string): Promise<void> {
+  const db = requireDb()
+  await deleteDoc(doc(db, FIELD_NOTES_COLLECTION, id))
+}

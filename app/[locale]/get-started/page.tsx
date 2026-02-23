@@ -35,7 +35,7 @@ export default function GetStartedPage() {
                 Project
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed mb-8">
+            <p className="text-xl text-white/90 leading-relaxed mb-8">
               Tell us about your project and we'll provide a free estimate within 24 hours. 
               No obligation, no pressure—just honest advice.
             </p>
@@ -43,7 +43,7 @@ export default function GetStartedPage() {
             {/* Trust badges */}
             <div className="flex flex-wrap justify-center gap-6">
               {benefits.map((benefit) => (
-                <div key={benefit.text} className="flex items-center gap-2 text-white/70">
+                <div key={benefit.text} className="flex items-center gap-2 text-white/90">
                   <benefit.icon className="w-5 h-5 text-gold-400" />
                   <span className="text-sm">{benefit.text}</span>
                 </div>

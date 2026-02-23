@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createLeadInDrive, isDriveConfigured } from '@/lib/google-drive'
 import { sendNewLeadNotification, sendLeadConfirmation, isEmailConfigured } from '@/lib/email'
+import { saveLead } from '@/lib/firebase-admin-server'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,6 +24,18 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(`\n🏠 New Lead: ${firstName} ${lastName} — ${services.join(', ')}`)
+
+    // Save to Firebase (primary data store)
+    try {
+      await saveLead({
+        firstName, lastName, email, phone, preferredContact,
+        address, city, state, zip, services,
+        projectDescription, timeline, budget,
+        howDidYouHear, additionalNotes,
+      })
+    } catch (fbError: any) {
+      console.error('❌ Firebase save error (non-fatal):', fbError?.message || fbError)
+    }
 
     // Generate communication tag
     const contactTag = preferredContact ? `[${preferredContact.toUpperCase()}]` : '[PHONE]'

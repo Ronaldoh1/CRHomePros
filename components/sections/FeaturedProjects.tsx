@@ -81,7 +81,7 @@ export function FeaturedProjects() {
               {t.featuredProjects.title}
             </h2>
           </div>
-          <p className="text-dark-300 max-w-md text-lg">
+          <p className="text-dark-100 max-w-md text-lg">
             {t.featuredProjects.description}
           </p>
         </div>
@@ -147,7 +147,7 @@ export function FeaturedProjects() {
           {/* Info Side */}
           <div className="space-y-6">
             {/* Project Details */}
-            <div className="flex items-center gap-4 text-dark-400">
+            <div className="flex items-center gap-4 text-dark-200">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
                 <span>{activeProject.location}</span>
@@ -164,7 +164,7 @@ export function FeaturedProjects() {
             </h3>
 
             {/* Description */}
-            <p className="text-dark-300 text-lg leading-relaxed">
+            <p className="text-dark-100 text-lg leading-relaxed">
               {activeProject.description}
             </p>
 

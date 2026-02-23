@@ -101,13 +101,13 @@ export default function SubmitReviewPage() {
     <>
       <section className="pt-32 pb-12 bg-gradient-to-br from-dark-900 via-primary-900 to-dark-950">
         <div className="container-custom">
-          <Link href="/reviews" className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-6 transition-colors">
+          <Link href="/reviews" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors">
             <ArrowLeft className="w-4 h-4" />Back to Reviews
           </Link>
           <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
             Share Your Experience
           </h1>
-          <p className="text-white/70 text-lg max-w-2xl">
+          <p className="text-white/90 text-lg max-w-2xl">
             We'd love to hear about your project! Your feedback helps other homeowners 
             find quality contractors they can trust.
           </p>

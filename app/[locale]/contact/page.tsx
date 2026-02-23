@@ -49,7 +49,7 @@ export default function ContactPage() {
               {"Let's Talk About "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 to-gold-500">Your Project</span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               {"Have questions? Ready for an estimate? We'd love to hear from you. Reach out and let's discuss how we can help transform your home."}
             </p>
           </div>

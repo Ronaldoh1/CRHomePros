@@ -114,7 +114,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <Link href="/services" className="inline-flex items-center text-primary-300 hover:text-white mb-6">
+            <Link href="/services" className="inline-flex items-center text-primary-100 hover:text-white mb-6">
               ← Back to Services
             </Link>
             <div className="flex items-center gap-4 mb-6">
@@ -123,8 +123,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6">{service.name}</h1>
-            <p className="text-xl text-white/70 leading-relaxed mb-8">{service.shortDescription}</p>
-            <div className="flex flex-wrap gap-6 text-white/70 mb-8">
+            <p className="text-xl text-white/90 leading-relaxed mb-8">{service.shortDescription}</p>
+            <div className="flex flex-wrap gap-6 text-white/90 mb-8">
               <div className="flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-gold-400" />
                 <span>{service.priceRange}</span>
@@ -192,10 +192,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <section className="section-padding bg-primary-800">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center text-white">
-            <div className="text-6xl text-primary-600 mb-6">"</div>
-            <p className="text-xl md:text-2xl leading-relaxed mb-8">{relatedTestimonial.text}</p>
-            <p className="font-semibold">{relatedTestimonial.name}</p>
-            <p className="text-primary-300">{relatedTestimonial.location}</p>
+            <div className="text-6xl text-gold-400 mb-6">"</div>
+            <p className="text-xl md:text-2xl leading-relaxed mb-8 text-white">{relatedTestimonial.text}</p>
+            <p className="font-semibold text-white">{relatedTestimonial.name}</p>
+            <p className="text-primary-200">{relatedTestimonial.location}</p>
           </div>
         </div>
       </section>

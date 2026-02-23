@@ -14,8 +14,8 @@ export function ScrollIndicator({ className, text = "Scroll for more" }: ScrollI
       "flex flex-col items-center gap-2 animate-bounce-slow",
       className
     )}>
-      <span className="text-sm text-white/60 font-medium">{text}</span>
-      <ChevronDown className="w-6 h-6 text-white/60" />
+      <span className="text-sm text-white/80 font-medium">{text}</span>
+      <ChevronDown className="w-6 h-6 text-white/80" />
     </div>
   )
 }

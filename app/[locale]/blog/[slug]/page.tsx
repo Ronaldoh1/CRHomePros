@@ -75,7 +75,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-6 text-white/70">
+            <div className="flex flex-wrap items-center gap-6 text-white/90">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4" />
                 {post.author}

@@ -246,7 +246,7 @@ export const TESTIMONIALS = [
     name: 'Marneik',
     location: 'Silver Spring, MD',
     rating: 5,
-    text: 'C & R General Services, Inc. has worked for me for several years. They provide a wide range of services such as painting, drywall, tile, roofing, gutter repairs, concrete work, animal removal and anything that I could not get a contractor to do. They always showed up when scheduled, explained hidden damages and were very professional. All work was done satisfactory and guaranteed. You definitely get what you pay for and it is worth it!!',
+    text: 'C & R General Services, Inc. (now CR Home Pros) has worked for me for several years. They provide a wide range of services such as painting, drywall, tile, roofing, gutter repairs, concrete work, animal removal and anything that I could not get a contractor to do. They always showed up when scheduled, explained hidden damages and were very professional. All work was done satisfactory and guaranteed. You definitely get what you pay for and it is worth it!!',
     service: 'Multiple Services',
   },
   {
@@ -254,7 +254,7 @@ export const TESTIMONIALS = [
     name: 'Ketty',
     location: 'Woodbridge, VA',
     rating: 5,
-    text: 'Carlos was the best technician you could have sent to inspect my furnace. I was pleased to see he came on time and was very helpful in answering all my questions. He was patient, friendly, and most importantly knowledgeable. He explained in detail what repair needed to be done and what would be involved. I am sold on C&R GENERAL SERVICES INC. and would not hesitate to recommend it to anyone!!!',
+    text: 'Carlos was the best technician you could have sent to inspect my furnace. I was pleased to see he came on time and was very helpful in answering all my questions. He was patient, friendly, and most importantly knowledgeable. He explained in detail what repair needed to be done and what would be involved. I am sold on C&R General Services (now CR Home Pros) and would not hesitate to recommend it to anyone!!!',
     service: 'HVAC Repair',
   },
   {
@@ -262,7 +262,7 @@ export const TESTIMONIALS = [
     name: 'Alice',
     location: 'Temple Hills, MD',
     rating: 5,
-    text: 'We highly recommend that you contact C&R General Services if you are considering home improvements that is A+ in customer service, materials, workers, and follow through. We selected C&R General Services because Mr. Hernandez advised us that it would not be necessary to replace the entire deck. He replaced some boards, reinforced some boards, cleaned and stained the deck. It still looks beautiful and new after 3 years.',
+    text: 'We highly recommend that you contact C&R General Services (now CR Home Pros) if you are considering home improvements that is A+ in customer service, materials, workers, and follow through. We selected C&R General Services (now CR Home Pros) because Mr. Hernandez advised us that it would not be necessary to replace the entire deck. He replaced some boards, reinforced some boards, cleaned and stained the deck. It still looks beautiful and new after 3 years.',
     service: 'Deck Restoration',
   },
   {
@@ -278,7 +278,7 @@ export const TESTIMONIALS = [
     name: 'Anna R. Heyden',
     location: 'Rockville, MD',
     rating: 5,
-    text: 'I would like to highly recommend Carlos Hernandez of C&R General Services Inc. He is honest, professional, intelligent, talented, and hard working. He can do anything you ask of him. He has completely renovated my basement, bathroom, and bedroom with amazing results. Carlos has gone above and beyond any expectations. No one should hesitate to call him.',
+    text: 'I would like to highly recommend Carlos Hernandez of C&R General Services (now CR Home Pros). He is honest, professional, intelligent, talented, and hard working. He can do anything you ask of him. He has completely renovated my basement, bathroom, and bedroom with amazing results. Carlos has gone above and beyond any expectations. No one should hesitate to call him.',
     service: 'Complete Renovation',
   },
   {
@@ -286,7 +286,7 @@ export const TESTIMONIALS = [
     name: 'Larry',
     location: 'Fort Washington, MD',
     rating: 5,
-    text: 'I have used C&R General Services for more than ten years to do home improvement projects. A friend told her about a contractor that had completed work for her and she was very satisfied with the work he did. We had Mr. Carlos Hernandez remodel our two bathrooms and some minor electrical work and were very pleased with the finished product. After having worked with Mr. Hernandez and C&R General Services for over ten years, I highly recommend them to all my friends.',
+    text: 'I have used C&R General Services (now CR Home Pros) for more than ten years to do home improvement projects. A friend told her about a contractor that had completed work for her and she was very satisfied with the work he did. We had Mr. Carlos Hernandez remodel our two bathrooms and some minor electrical work and were very pleased with the finished product. After having worked with Mr. Hernandez and C&R General Services (now CR Home Pros) for over ten years, I highly recommend them to all my friends.',
     service: 'Long-term Client',
   },
   {
@@ -294,7 +294,7 @@ export const TESTIMONIALS = [
     name: 'Todd',
     location: 'Capitol Hill, Washington DC',
     rating: 5,
-    text: 'We manage several apartment buildings in the Capitol Hill neighborhood, and have had our fair share of emergency repairs that C&R General Services have tackled. Carlos and his crew have always been available to step in and take care of repairs after surprise leaks and even a collapsed ceiling! All work was done quickly, cleanly, and professionally. We\'re happy to have C&R on our list of preferred contractors.',
+    text: 'We manage several apartment buildings in the Capitol Hill neighborhood, and have had our fair share of emergency repairs that C&R General Services (now CR Home Pros) have tackled. Carlos and his crew have always been available to step in and take care of repairs after surprise leaks and even a collapsed ceiling! All work was done quickly, cleanly, and professionally. We\'re happy to have CR Home Pros on our list of preferred contractors.',
     service: 'Emergency Repairs',
   },
   {
@@ -302,7 +302,7 @@ export const TESTIMONIALS = [
     name: 'Jeffrey',
     location: 'Oxon Hill, MD',
     rating: 5,
-    text: 'C&R General Services / Carlos completed a half bath in my home last year. They did excellent work, showed up on time, and cleaned up after themselves. I was so pleased with their work I recommended them to my mother-in-law.',
+    text: 'C&R General Services (now CR Home Pros) / Carlos completed a half bath in my home last year. They did excellent work, showed up on time, and cleaned up after themselves. I was so pleased with their work I recommended them to my mother-in-law.',
     service: 'Bathroom Remodel',
   },
   {
@@ -310,7 +310,7 @@ export const TESTIMONIALS = [
     name: 'Ms. Chambers',
     location: 'Silver Spring, MD',
     rating: 5,
-    text: 'C & R General Services, Inc. has worked for me for several years. They provide a wide range of services such as painting, drywall, tile, roofing, gutter repairs, concrete work, animal removal and anything that I could not get a contractor to do. They always showed up when scheduled, explained hidden damages and were very professional. Although they were not always the cheapest labor in town, all work was done satisfactory and guaranteed. You definitely get what you pay for and it is worth it!!',
+    text: 'C & R General Services, Inc. (now CR Home Pros) has worked for me for several years. They provide a wide range of services such as painting, drywall, tile, roofing, gutter repairs, concrete work, animal removal and anything that I could not get a contractor to do. They always showed up when scheduled, explained hidden damages and were very professional. All work was done satisfactory and guaranteed. You definitely get what you pay for and it is worth it!!',
     service: 'Multiple Services',
   },
 ] as const

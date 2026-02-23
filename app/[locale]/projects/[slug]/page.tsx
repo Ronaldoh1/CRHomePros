@@ -82,7 +82,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* Hero */}
       <section className="relative pt-32 pb-12 bg-gradient-to-br from-dark-900 via-primary-900 to-dark-950">
         <div className="container-custom relative z-10">
-          <Link href="/projects" className="inline-flex items-center text-primary-300 hover:text-white mb-6">
+          <Link href="/projects" className="inline-flex items-center text-primary-100 hover:text-white mb-6">
             ← Back to Projects
           </Link>
           <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -96,7 +96,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
             {project.title}
           </h1>
-          <div className="flex flex-wrap gap-6 text-white/70">
+          <div className="flex flex-wrap gap-6 text-white/90">
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5" />
               {project.location}

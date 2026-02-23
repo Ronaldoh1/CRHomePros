@@ -40,7 +40,7 @@ export default function BlogPage() {
                 Tips & Insights
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               Expert advice, project inspiration, and practical tips from our
               experienced team.
             </p>

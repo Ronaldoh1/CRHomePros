@@ -120,7 +120,7 @@ export default function InvoicesPage() {
             <DollarSign className="w-6 h-6 text-blue-400" />
             {inv.isCorrection ? 'Correction Invoice' : 'Create Invoice'}
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Generate professional invoices for your clients</p>
+          <p className="text-slate-300 text-sm mt-1">Generate professional invoices for your clients</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <Link href="/admin/invoices/sent" className="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 text-sm hover:bg-slate-700 flex items-center gap-2">
@@ -165,7 +165,7 @@ export default function InvoicesPage() {
             <div className="space-y-3">
               {inv.items.map((item, idx) => (
                 <div key={item.id} className="flex gap-3 items-start">
-                  <span className="text-slate-500 text-sm mt-3 w-6 text-right flex-shrink-0">{idx + 1}.</span>
+                  <span className="text-slate-400 text-sm mt-3 w-6 text-right flex-shrink-0">{idx + 1}.</span>
                   <div className="flex-1 grid sm:grid-cols-[1fr_80px_120px] gap-3">
                     <input value={item.description} onChange={e => updateItem(item.id, 'description', e.target.value)} placeholder="Power wash garage..." className={ic} />
                     <input type="number" value={item.quantity} onChange={e => updateItem(item.id, 'quantity', Number(e.target.value))} min={1} className={ic + ' text-center'} placeholder="Qty" />
@@ -177,11 +177,11 @@ export default function InvoicesPage() {
             </div>
             <button onClick={addItem} className="mt-4 flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 px-3 py-2 rounded-lg hover:bg-blue-600/10"><Plus className="w-4 h-4" /> Add Line Item</button>
             <div className="mt-6 pt-4 border-t border-white/5 space-y-2 text-right">
-              <div className="text-slate-400 text-sm">Subtotal: <span className="text-white font-medium ml-2">{fmt(subtotal)}</span></div>
+              <div className="text-slate-300 text-sm">Subtotal: <span className="text-white font-medium ml-2">{fmt(subtotal)}</span></div>
               <div className="flex items-center justify-end gap-2">
-                <span className="text-slate-400 text-sm">Tax</span>
+                <span className="text-slate-300 text-sm">Tax</span>
                 <input type="number" value={inv.taxRate} onChange={e => updateField('taxRate', Number(e.target.value))} className="w-16 bg-slate-800 border border-white/10 rounded-lg px-2 py-1 text-white text-sm text-center" />
-                <span className="text-slate-400 text-sm">%: <span className="text-white font-medium ml-1">{fmt(tax)}</span></span>
+                <span className="text-slate-300 text-sm">%: <span className="text-white font-medium ml-1">{fmt(tax)}</span></span>
               </div>
               <div className="text-lg font-bold text-white pt-2 border-t border-white/10">Total: {fmt(total)}</div>
             </div>

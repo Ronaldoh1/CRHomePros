@@ -67,7 +67,7 @@ export default function ReviewsPage() {
                 Say About Us
               </span>
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-white/90 leading-relaxed">
               Don't take our word for it—read real reviews from homeowners across the DMV who've 
               experienced the CR Home Pros difference.
             </p>
@@ -172,7 +172,7 @@ export default function ReviewsPage() {
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div>
                     <p className="font-display font-semibold text-white">{letter.author}</p>
-                    <p className="text-sm text-primary-300">{letter.service}</p>
+                    <p className="text-sm text-primary-100">{letter.service}</p>
                   </div>
                   {letter.pdfPath && (
                     <a

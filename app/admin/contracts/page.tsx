@@ -146,7 +146,7 @@ export default function ContractsPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-3"><Briefcase className="w-6 h-6 text-blue-400" /> {ct.isCorrection ? 'Corrected Contract' : 'Create Contract'}</h1>
-          <p className="text-slate-400 text-sm mt-1">Professional scope of work and agreement</p>
+          <p className="text-slate-300 text-sm mt-1">Professional scope of work and agreement</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <Link href="/admin/contracts/sent" className="px-3 py-2 rounded-xl bg-slate-800 text-slate-300 text-sm hover:bg-slate-700 flex items-center gap-2"><FileText className="w-4 h-4" /> Sent</Link>
@@ -190,7 +190,7 @@ export default function ContractsPage() {
             <div className="space-y-3">
               {ct.scopeItems.map((item, idx) => (
                 <div key={item.id} className="flex gap-3 items-start">
-                  <span className="text-slate-500 text-sm mt-3 w-6 text-right flex-shrink-0">{idx + 1}.</span>
+                  <span className="text-slate-300 text-sm mt-3 w-6 text-right flex-shrink-0">{idx + 1}.</span>
                   <textarea value={item.description} onChange={e => updateScope(item.id, e.target.value)} placeholder="Protect all furniture with plastic and floors with drop cloth..." rows={2} className={ic + ' flex-1'} />
                   <button onClick={() => removeScope(item.id)} className="mt-3 text-red-400 hover:text-red-300 p-1" disabled={ct.scopeItems.length === 1}><Trash2 className="w-4 h-4" /></button>
                 </div>
